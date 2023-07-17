@@ -9,4 +9,4 @@ COPY package*.json ./
 COPY yarn.lock ./
 RUN npm ci
 COPY . .
-CMD ["node", "run start-server"]
+CMD ["npm", "run start-server"]
