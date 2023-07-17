@@ -86,7 +86,7 @@ function App() {
 	}, [data]);
 
 	function getData() {
-		fetch('http://localhost:3000/get-data')
+		fetch('https://debank-scraper-server.onrender.com/get-data')
 			.then(res => res.json())
 			.then(res => {
 				console.log(res);
@@ -100,7 +100,7 @@ function App() {
 	function handleTriggerScraperBtn() {
 		setTriggerBtnLoading(true);
 		document.body.style.cursor = "wait";
-		fetch('http://localhost:3000/trigger-scraper')
+		fetch('https://debank-scraper-server.onrender.com/trigger-scraper')
 			.then(res => res.json())
 			.then(res => {
 				console.log(res);
