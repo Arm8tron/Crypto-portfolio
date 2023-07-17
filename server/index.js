@@ -5,8 +5,9 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 app.use(cors());
+require('dotenv').config()
 
-const port = 3000; // or any other port number you prefer
+const port = process.env.PORT || 3000; // or any other port number you prefer
 
 app.listen(port, () => {
 	console.log(`Server is running on port ${port}`);
@@ -50,13 +51,19 @@ schedule.scheduleJob('30 9,17,1 * * *', init);
 
 async function init() {
 	console.log("Starting init at: ", Date.now());
-	browser = await puppeteer.launch({ headless: 'new' });
-	page = await browser.newPage();
-
-	console.log("Puppe launched");
 	const data = new Map();
 
 	try {
+		browser = await puppeteer.launch({
+			headless: 'new',
+			executablePath: process.env.NODE_ENV == "production"
+				? process.env.PUPPETEER_EXECUTABLE_PATH
+				: puppeteer.executablePath()
+		});
+
+		page = await browser.newPage();
+		console.log("Puppe launched");
+
 		for await (let address of myWalletAddresses) {
 			const amount = await getWalletAmount(address);
 
