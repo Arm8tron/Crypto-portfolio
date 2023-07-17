@@ -12,6 +12,7 @@ import {
 	Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import globals from '../globals';
 
 ChartJS.register(
 	CategoryScale,
@@ -86,7 +87,7 @@ function App() {
 	}, [data]);
 
 	function getData() {
-		fetch('https://debank-scraper-server.onrender.com/get-data')
+		fetch(`${globals.BASE_URL}/get-data`)
 			.then(res => res.json())
 			.then(res => {
 				console.log(res);
@@ -100,15 +101,15 @@ function App() {
 	function handleTriggerScraperBtn() {
 		setTriggerBtnLoading(true);
 		document.body.style.cursor = "wait";
-		fetch('https://debank-scraper-server.onrender.com/trigger-scraper')
+		fetch(`${globals.BASE_URL}/trigger-scraper`)
 			.then(res => res.json())
 			.then(res => {
-				console.log(res);
+				console.log(res, "=====");
 				if (res.success) {
 					setData(res.data);
 				}
 			}).catch(err => {
-				console.log(err);
+				console.log(err, "======");
 			}).finally(() => {
 				setTriggerBtnLoading(false);
 				document.body.style.cursor = "default";

@@ -49,9 +49,11 @@ app.get('/trigger-scraper', (req, res) => {
 schedule.scheduleJob('30 9,17,1 * * *', init);
 
 async function init() {
+	console.log("Starting init at: ", Date.now());
 	browser = await puppeteer.launch({ headless: 'new' });
 	page = await browser.newPage();
 
+	console.log("Puppe launched");
 	const data = new Map();
 
 	try {
@@ -65,6 +67,7 @@ async function init() {
 
 		await browser.close();
 
+		console.log("Init function executed");
 		return { success: "Init function executed" }
 	} catch (error) {
 		console.error(error);
