@@ -54,6 +54,10 @@ async function init() {
 	const data = new Map();
 
 	try {
+
+		console.log(`this is ${process.env.NODE_ENV}`);
+		console.log(process.env.NODE_ENV == "production");
+		
 		browser = await puppeteer.launch({
 			headless: 'new',
 			executablePath: process.env.NODE_ENV == "production"
