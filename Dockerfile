@@ -9,4 +9,4 @@ COPY package*.json ./
 COPY yarn.lock ./
 RUN npm ci
 COPY . .
-CMD ["node", "server/index.js"]
+CMD [ "node", "server/index.js" ]
