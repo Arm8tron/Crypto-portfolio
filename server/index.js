@@ -63,7 +63,10 @@ async function init() {
 			executablePath: process.env.NODE_ENV == "production"
 				? process.env.PUPPETEER_EXECUTABLE_PATH
 				: puppeteer.executablePath(),
-			args: ['--no-sandbox', '--disable-setuid-sandbox'],
+			args: [
+				'--no-sandbox', 
+				'--disable-setuid-sandbox'
+			],
 		});
 
 		page = await browser.newPage();
