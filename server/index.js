@@ -50,7 +50,7 @@ app.get('/trigger-scraper', (req, res) => {
 schedule.scheduleJob('30 9,17,1 * * *', init);
 
 async function init() {
-	console.log("Starting init at: ", Date.now());
+	console.log("Starting init at: ", new Date().toDateString(), new Date().toTimeString());
 	const data = new Map();
 
 	try {
